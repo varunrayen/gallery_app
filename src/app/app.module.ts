@@ -9,13 +9,17 @@ import { AlertModule } from 'ngx-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { ImageComponent } from './image/image.component';
+
+import { ImageService } from './shared/image.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    GalleryComponent
+    GalleryComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,7 @@ import { GalleryComponent } from './gallery/gallery.component';
     HttpModule,
     AlertModule.forRoot()
   ],
-  providers: [],
+  providers: [ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
