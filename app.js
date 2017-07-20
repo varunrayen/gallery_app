@@ -1,15 +1,19 @@
 const express = require('express');
-const bodyParser= require('body-parser');
-const logger           = require('morgan');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
 //const busboyBodyParser = require('busboy-body-parser');
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const cors = require('cors');
-const app = express();
 const session = require('express-session');
 const multer = require('multer');
 const cookieParser = require('cookie-parser');
-var port = 3000;
+
+
+let port = 3000;
 const Image = require('./models/Image.js');
+const app = express();
+const main = require('./routing/routing.js');
+const dbURI = 'mongodb://127.0.0.1/gallery-app';
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -28,30 +32,30 @@ app.use((req, res, next) => {
 });
 
 
-
-
 app.get('/', function(req, res){
      res.send('Hello Express');
 });
 
-let main = require('./routing/routing.js');
+
 app.options('/api');
 app.use('/api', main);
 
-let dbURI = 'mongodb://127.0.0.1/gallery-app';
+//DB connection
     
-    mongoose.connect(dbURI);
+mongoose.connect(dbURI);
 
-    // CONNECTION EVENTS
-    mongoose.connection.on('connected', function() {
-        console.log('Mongoose connected to ' + dbURI);
-    });
-    mongoose.connection.on('error', function(err) {
-        console.log('Mongoose connection error: ' + err);
-    });
-    mongoose.connection.on('disconnected', function() {
-        console.log('Mongoose disconnected');
-    });
+// CONNECTION EVENTS
+mongoose.connection.on('connected', function() {
+    console.log('Mongoose connected to ' + dbURI);
+});
+mongoose.connection.on('error', function(err) {
+    console.log('Mongoose connection error: ' + err);
+});
+mongoose.connection.on('disconnected', function() {
+    console.log('Mongoose disconnected');
+});
+
+//File upload 
 
 var storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
