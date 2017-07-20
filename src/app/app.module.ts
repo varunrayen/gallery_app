@@ -2,8 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FileSelectDirective } from 'ng2-file-upload';
+
 
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 
 import { AlertModule } from 'ngx-bootstrap';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +15,35 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ImageComponent } from './image/image.component';
 
 import { ImageService } from './shared/image.service';
+import { AuthService } from './shared/auth.service';
+import { UploadComponent } from './upload/upload.component';
+
+const ROUTES = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'images',
+    component: ImageComponent
+  },
+  {
+    path: 'gallery',
+    component: GalleryComponent
+  },
+  {
+    path: 'upload',
+    component: UploadComponent
+  }
+
+];
+
+
 
 @NgModule({
   declarations: [
@@ -19,15 +51,18 @@ import { ImageService } from './shared/image.service';
     LoginComponent,
     HeaderComponent,
     GalleryComponent,
-    ImageComponent
+    ImageComponent,
+    UploadComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    RouterModule.forRoot(ROUTES)
   ],
-  providers: [ImageService],
+  providers: [ImageService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

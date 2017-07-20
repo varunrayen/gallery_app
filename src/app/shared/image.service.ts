@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+
 
 @Injectable()
 export class ImageService {
 
-  constructor() { }
+  constructor(private http:Http) { }
   
   visibleImages = [];
+
+  private splashUrl = 'http://www.splashbase.co/api/v1/images/random';
 
   getImages(){
   	return this.visibleImages = IMAGES.slice(0);
@@ -14,6 +19,12 @@ export class ImageService {
   // getImages(id: number){
   // 	return IMAGES.slice(0).find(image => image.id == id);
   // }
+
+  randomImage(){
+    return this.http.get(this.splashUrl)
+    .map(res => res.json());
+
+  }
 
 }
 

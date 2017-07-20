@@ -9,9 +9,15 @@ import { ImageService } from '../shared/image.service';
 })
 export class ImageComponent implements OnInit {
 
+	imageUrl: String;
+
   constructor(private ImageService: ImageService) { }
 
   ngOnInit() {
+  	this.ImageService.randomImage()
+  	.subscribe(data => {
+  		this.imageUrl = data.url;
+  	});
   }
 
 }
