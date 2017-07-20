@@ -11,9 +11,13 @@ export class ImageService {
   visibleImages = [];
 
   private splashUrl = 'http://www.splashbase.co/api/v1/images/random';
+  private galleryUrl = 'http://localhost:3000/api/gallery';
 
   getImages(){
-  	return this.visibleImages = IMAGES.slice(0);
+  	// return this.visibleImages = IMAGES.slice(0);
+     let data = localStorage.getItem('uname');
+     return this.http.post(this.galleryUrl, {username: data})
+     .map(res => res.json());
   }
 
   // getImages(id: number){

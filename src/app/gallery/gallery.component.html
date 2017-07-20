@@ -1,9 +1,11 @@
-<h2> {{ title }} </h2>
+<h2> Welcome {{ currentUser }} </h2>
+
+<h3> {{ title }} </h3>
 
 <div class="row">
 	<ul id="thumbnailsList">
 		<li *ngFor="let image of visibleImages">
-			<img src="{{image.url}}" class="tn" width="200" height="160">
+			<img src="./uploads/{{image.imagename}}" class="tn" width="200" height="160">
 		</li>
 	</ul>
 </div>

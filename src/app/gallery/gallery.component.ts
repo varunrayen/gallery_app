@@ -11,10 +11,14 @@ import { ImageService } from '../shared/image.service';
 export class GalleryComponent implements OnInit {
 
 	title = 'Recent Photos';
-	visibleImages: any[] = [];
+  currentUser = localStorage.getItem('uname');
+	visibleImages: any[];
 
   constructor(private imageService: ImageService) { 
-  	this.visibleImages = this.imageService.getImages();
+  	this.imageService.getImages()
+    .subscribe(images => {
+      this.visibleImages = images;
+    });
   }
 
   ngOnInit() {

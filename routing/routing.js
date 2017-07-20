@@ -3,11 +3,14 @@ const router = require('express').Router();
 const mongoose = require("mongoose");
 const fs = require("fs");
 const User = require('../models/User.js');
+const Image = require('../models/Image.js');
 const session = require('express-session');
 const axios = require('axios');
 const API = 'https://jsonplaceholder.typicode.com';
 const cookieParser = require('cookie-parser');
-
+const path = require('path');
+const url = require('url');
+const imageDir = './uploads';
 
 router.use(session({secret: "sdfga465regse", resave: false, saveUninitialized: true}));
 router.use(cookieParser());
@@ -23,6 +26,9 @@ router.get('/dashboard', (req, res) => {
     return res.status(401).send();
   }
 
+
+
+
   return res.status(200).send();
 });
 
@@ -30,19 +36,25 @@ router.get('/dashboard', (req, res) => {
 router.get('/images', (req, res) => {
 
 
-  if(!req.session.username){
-    return res.status(401).send();
-  }
-  else{
-     axios.get(`${API}/photos`)
-    .then(posts => {
-      res.status(200).json(posts.data);
-    })
-    .catch(error => {
-      res.status(500).send(error)
+  // if(!req.session.username){
+  //   return res.status(401).send();
+  // }
+  // else{
+       
+    var fileType = '.jpg',
+        files = [], i;
+    fs.readdir(imageDir, function (err, list) {
+        for(i=0; i<list.length; i++) {
+            if(path.extname(list[i]) === fileType) {
+                files.push(list[i]); //store the file name into the array files
+                console.log(list[i]);
+            }
+        }
+        console.log(err);
     });
+  
 
-  }
+  // }
  
 });
 
@@ -85,6 +97,7 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/users', (req, res) => {
+  console.log(req);
   mongoose.model('users').find(function(err, users) {
     res.send(users);
   });
@@ -92,6 +105,11 @@ router.get('/users', (req, res) => {
 
 
 
+router.post('/gallery', (req, res) => {
+  mongoose.model('images').find({username: req.body.username}, function(err, images) {
+    res.send(images);
+  });
+});
 
 
 // let Grid = require("gridfs-stream");
