@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +12,17 @@ export class HeaderComponent implements OnInit {
 
 	title = 'Angular Gallery App';
 
-  constructor() { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
+  }
+
+  onLogout(){
+    this.authService.logout();
+    this.router.navigate(['login']);
+    return false;
+
   }
 
 }

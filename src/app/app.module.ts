@@ -6,7 +6,7 @@ import { FileSelectDirective } from 'ng2-file-upload';
 
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AlertModule } from 'ngx-bootstrap';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +17,7 @@ import { ImageComponent } from './image/image.component';
 import { ImageService } from './shared/image.service';
 import { AuthService } from './shared/auth.service';
 import { UploadComponent } from './upload/upload.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const ROUTES = [
   {
@@ -34,11 +35,13 @@ const ROUTES = [
   },
   {
     path: 'gallery',
-    component: GalleryComponent
+    component: GalleryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'upload',
-    component: UploadComponent
+    component: UploadComponent,
+    canActivate: [AuthGuard]
   }
 
 ];
@@ -62,7 +65,7 @@ const ROUTES = [
     AlertModule.forRoot(),
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [ImageService, AuthService],
+  providers: [ImageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

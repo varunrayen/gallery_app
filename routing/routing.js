@@ -3,9 +3,13 @@ const mongoose = require("mongoose");
 const session = require('express-session');
 const axios = require('axios');
 const cookieParser = require('cookie-parser');
+const passport = require("passport");
+const passportJWT = require("passport-jwt");
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/User.js');
 const Image = require('../models/Image.js');
+
 
 router.use(session({secret: "sdfga465regse", resave: false, saveUninitialized: true}));
 router.use(cookieParser());
@@ -36,9 +40,10 @@ router.post('/login', (req, res) => {
     if(!user){
       return res.status(404).send();
     }
-    res.cookie('username', username);
-    console.log(req.cookies);
-    return res.json({success: true, username: username});
+    var token = jwt.sign(user, 'creabird', {
+          expiresIn: 3600 // expires in 24 hours
+    });
+    return res.json({success: true, username: username, token: token});
   })
 });
 

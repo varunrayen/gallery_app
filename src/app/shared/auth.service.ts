@@ -25,8 +25,20 @@ export class AuthService {
             );
   }
 
-  storeUserData(username){
+  storeUserData(username, token){
     localStorage.setItem('uname', username);
+    localStorage.setItem('token', token);
+    this.authToken = token;
+  }
+  
+  loggedIn(){
+    return tokenNotExpired();
+  }
+
+  logout(){
+    this.authToken = null;
+    localStorage.clear();
+
   }
 
 }

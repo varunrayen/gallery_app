@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       if(data.success){
         console.log(data);
         this.router.navigate(['gallery']);
-        this.authService.storeUserData(data.username);
+        this.authService.storeUserData(data.username, data.token);
 
       }
       else{
