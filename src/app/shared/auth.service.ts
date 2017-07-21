@@ -11,14 +11,24 @@ export class AuthService {
 	user: any;
   authToken: any;
 
-  private authUrl = 'http://localhost:3000/api/login';
+  private authUrl = 'http://localhost:3000/api/';
 
   constructor(private http:Http) { }
 
   authenticateUser(username, password){
   let headers = new Headers();
   headers.append('Content-Type', 'application/json');
-  return this.http.post(this.authUrl, JSON.stringify({username: username,password: password}), {headers: headers})
+  return this.http.post(this.authUrl + 'login', JSON.stringify({username: username,password: password}), {headers: headers})
+          .map(
+              res => res.json(),
+              err => console.log(err)
+            );
+  }
+
+  registerUser(username, password){
+  let headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  return this.http.post(this.authUrl + 'register', JSON.stringify({username: username,password: password}), {headers: headers})
           .map(
               res => res.json(),
               err => console.log(err)

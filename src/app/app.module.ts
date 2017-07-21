@@ -15,6 +15,7 @@ import { ImageService } from './shared/image.service';
 import { AuthService } from './shared/auth.service';
 import { UploadComponent } from './upload/upload.component';
 import { AuthGuard } from './shared/auth.guard';
+import { RegisterComponent } from './register/register.component';
 
 const ROUTES = [
   {
@@ -25,6 +26,10 @@ const ROUTES = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'images',
@@ -51,7 +56,8 @@ const ROUTES = [
     GalleryComponent,
     ImageComponent,
     UploadComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -60,7 +60,7 @@ router.post('/register', (req, res) => {
       console.log(err);
       return res.status(500).send();
     }
-    return res.status(200).send();  p
+    return res.json({success: true});
   })
 
 });
