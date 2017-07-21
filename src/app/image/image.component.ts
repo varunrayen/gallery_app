@@ -8,7 +8,7 @@ import { ImageService } from '../shared/image.service';
   styleUrls: ['./image.component.css']
 })
 export class ImageComponent implements OnInit {
-
+  title =  'Random Picture of the Day'
 	imageUrl: String;
 
   constructor(private ImageService: ImageService) { }

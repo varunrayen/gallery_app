@@ -10,25 +10,14 @@ const URL = 'http://localhost:3000/upload';
 })
 export class UploadComponent implements OnInit {
 
-
 	public uploader:FileUploader = new FileUploader({url: URL});
 
-  constructor() { 
- 
-
-  }
+  constructor() { }
 
   ngOnInit() {
   	var uo: FileUploaderOptions = {};
 		uo.headers = [{ name: 'name', value : localStorage.getItem('uname') } ]
 		this.uploader.setOptions(uo);
-
   }
 
- 
-  	
-
-
-  
-  
 }

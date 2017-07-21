@@ -3,9 +3,14 @@
 <h3> {{ title }} </h3>
 
 <div class="row">
-	<ul id="thumbnailsList">
+	<div class="col-md-6">
+		<ul id="thumbnailsList">
 		<li *ngFor="let image of visibleImages">
-			<img src="./uploads/{{image.imagename}}" class="tn" width="200" height="160">
+			<img src="./uploads/{{image.imagename}}" class="tn" width="200" height="200">
 		</li>
-	</ul>
+		</ul>
+	</div>
+	<div class="col-md-6">
+		<app-image> </app-image>
+	</div>
 </div>

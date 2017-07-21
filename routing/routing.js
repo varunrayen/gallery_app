@@ -72,8 +72,6 @@ router.get('/users', (req, res) => {
   });
 });
 
-
-
 router.post('/gallery', (req, res) => {
   mongoose.model('images').find({username: req.body.username}, function(err, images) {
     res.send(images);

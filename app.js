@@ -64,7 +64,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
         filename: function (req, file, cb) {
             var datetimestamp = Date.now();
             let randomNo = Math.floor((Math.random() * 1000000) + 1);
-            cb(null, 'Image' + '-' + req.headers.name + randomNo + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+            cb(null, 'Image' + '-' + req.headers.name + '-' + randomNo + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
         }
     });
 

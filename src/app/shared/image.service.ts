@@ -20,6 +20,7 @@ export class ImageService {
      .map(res => res.json());
   }
 
+  // Static Images
   // getImages(id: number){
   // 	return IMAGES.slice(0).find(image => image.id == id);
   // }
@@ -31,7 +32,6 @@ export class ImageService {
   }
 
 }
-
 
 const IMAGES = [
 	{"id": 1, "caption": "Grassland Deer", "url": "assets/img/deer.jpg"},

@@ -20,26 +20,26 @@ export class LoginComponent implements OnInit {
   }
   onLogin(){
 
-      let username = this.username; 
-      let password = this.password;
-      
-      console.log(username);
+    let username = this.username; 
+    let password = this.password;
+    
+    console.log(username);
 
-      this.authService.authenticateUser(username, password)
-       // .subscribe(() => {});
-      .subscribe(data => {
-      if(data.success){
-        console.log(data);
-        this.router.navigate(['gallery']);
-        this.authService.storeUserData(data.username, data.token);
+    this.authService.authenticateUser(username, password)
 
-      }
-      else{
-        console.log(data);
-        this.router.navigate(['login']);
-      }
+    .subscribe(data => {
+    if(data.success){
+      console.log(data);
+      this.router.navigate(['gallery']);
+      this.authService.storeUserData(data.username, data.token);
 
-      });
+    }
+    else{
+      console.log(data);
+      this.router.navigate(['login']);
+    }
+
+    });
 
 
   }

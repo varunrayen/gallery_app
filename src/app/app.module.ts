@@ -3,17 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { FileSelectDirective } from 'ng2-file-upload';
-
+import { RouterModule, Routes } from '@angular/router';
+import { AlertModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
-
-import { AlertModule } from 'ngx-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ImageComponent } from './image/image.component';
-
 import { ImageService } from './shared/image.service';
 import { AuthService } from './shared/auth.service';
 import { UploadComponent } from './upload/upload.component';
@@ -45,8 +42,6 @@ const ROUTES = [
   }
 
 ];
-
-
 
 @NgModule({
   declarations: [
